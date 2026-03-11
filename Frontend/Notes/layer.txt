@@ -1,0 +1,196 @@
+REACT 4 LAYER ARCHITECTURE
+
+
+1. UI LAYER
+-----------
+
+Purpose:
+This layer is responsible only for rendering the user interface.
+It should not contain business logic or API calls.
+
+Structure:
+
+UI
+ ├── components
+ └── pages
+
+
+components:
+Reusable UI elements used across the application.
+
+Examples:
+Button.jsx
+Input.jsx
+Navbar.jsx
+Card.jsx
+
+
+pages:
+Full screens of the application.
+
+Examples:
+Login.jsx
+Register.jsx
+Dashboard.jsx
+Profile.jsx
+
+Pages combine multiple components to create a full view.
+
+
+--------------------------------------------------
+
+
+2. HOOK LAYER
+-------------
+
+Purpose:
+This layer contains custom React hooks.
+Hooks handle business logic and connect UI with state and APIs.
+
+Structure:
+
+hooks
+ ├── useAuth.js
+ ├── useLogin.js
+ └── useRegister.js
+
+
+Responsibilities:
+- Handle form logic
+- Call context functions
+- Manage side effects
+- Reuse business logic across components
+
+
+Example Flow:
+UI Component → Custom Hook → Context → API
+
+
+--------------------------------------------------
+
+
+3. STATE LAYER
+--------------
+
+Purpose:
+This layer manages global application state using React Context.
+
+Structure:
+
+state
+ ├── auth.context.jsx
+ └── ai.context.jsx
+
+
+Responsibilities:
+- Store user authentication data
+- Manage global app state
+- Provide state to the entire application
+
+
+Example Responsibilities of auth.context:
+- store logged-in user
+- handle login
+- handle logout
+- update authentication state
+
+
+--------------------------------------------------
+
+
+4. API LAYER
+------------
+
+Purpose:
+This layer handles communication with the backend server.
+
+Structure:
+
+api
+ └── services
+      ├── auth.api.js
+      ├── user.api.js
+      └── ai.api.js
+
+
+Responsibilities:
+- Send HTTP requests
+- Receive responses
+- Keep API logic separate from UI
+
+
+Example API operations:
+- login request
+- register request
+- fetch user data
+- send AI prompt
+
+
+--------------------------------------------------
+
+
+APPLICATION DATA FLOW
+---------------------
+
+User Action
+     ↓
+UI Component (Page or Component)
+     ↓
+Custom Hook
+     ↓
+Context / Global State
+     ↓
+API Service
+     ↓
+Backend Server
+     ↓
+Response Returned to UI
+
+
+--------------------------------------------------
+
+
+FINAL PROJECT STRUCTURE
+-----------------------
+
+src
+│
+├── ui
+│   ├── components
+│   │    ├── Button.jsx
+│   │    └── Input.jsx
+│   │
+│   └── pages
+│        ├── Login.jsx
+│        └── Register.jsx
+│
+├── hooks
+│    ├── useAuth.js
+│    └── useRegister.js
+│
+├── state
+│    ├── auth.context.jsx
+│    └── ai.context.jsx
+│
+├── api
+│    └── services
+│          └── auth.api.js
+│
+└── App.jsx
+
+
+--------------------------------------------------
+
+
+ADVANTAGES OF THIS ARCHITECTURE
+--------------------------------
+
+1. Clean separation of concerns
+2. Reusable logic using hooks
+3. Centralized state management
+4. Easy API management
+5. Scalable for large applications
+6. Easier debugging and maintenance
+
+
+--------------------------------------------------
