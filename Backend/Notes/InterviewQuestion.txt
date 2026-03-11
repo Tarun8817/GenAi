@@ -1,0 +1,29 @@
+Question:
+Why don’t we remove a token during logout, and why might we use token blacklisting? What is the best way to implement it?
+
+Answer:
+
+JWT (JSON Web Token) is stateless, which means the server does not store the token after generating it during login. 
+Because the server does not store the token, it cannot directly delete or remove the token when a user logs out. 
+Normally during logout, the client simply removes the token from localStorage or cookies.
+
+However, if someone still has the token, they can use it until the token expires. 
+To prevent this, some systems use token blacklisting.
+
+In token blacklisting, when a user logs out, the token is stored in a blacklist database. 
+For every protected request, the server checks whether the token exists in the blacklist. 
+If it exists, the request is rejected.
+
+Token blacklisting can be implemented using Redis or MongoDB.
+
+Redis is usually preferred because:
+- It is an in-memory database
+- It provides very high throughput and faster read/write operations
+- It supports TTL (time to live), so tokens automatically expire and get removed
+
+MongoDB can also be used, but it is slower compared to Redis because it is disk-based.
+
+Summary:
+JWT tokens cannot be removed because they are stateless. 
+To immediately invalidate tokens, we can store them in a blacklist using Redis or MongoDB, 
+and Redis is usually preferred because it is faster and designed for high-throughput operations.
